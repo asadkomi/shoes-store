@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 const styles = makeStyles({
   navbar: {
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     color: "#201F20",
 
     "& a": {
@@ -37,9 +37,9 @@ const styles = makeStyles({
   },
 
   formEdit: {
-    width: '100%',
+    width: "100%",
     maxWidth: 800,
-    margin: '0 auto',
+    margin: "0 auto",
   },
 
   card: {

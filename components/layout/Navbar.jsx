@@ -54,7 +54,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" className={style.navbar}>
+    <AppBar position="static" color="#fff" className={style.navbar}>
       <Toolbar>
         <NextLink href="/" passHref>
           <Link>
