@@ -99,6 +99,7 @@ const styles = makeStyles((theme) => ({
   searchInput: {
     paddingLeft: 5,
     width: 400,
+    height: 40,
     color: "#000000",
     "& ::placeholder": {
       color: "#606060",
