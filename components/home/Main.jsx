@@ -45,7 +45,7 @@ const Main = (props) => {
 
   return (
     <div>
-      <Grid className={style.mt1} container spacing={1}>
+      <Grid className="pt-5" container spacing={1}>
         <Grid md={12} xs={12}>
           <Carousel animation="slide">
             {featuredProducts.map((product) => (
