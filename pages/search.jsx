@@ -115,11 +115,11 @@ export default function Search(props) {
   return (
     <Layout title="Search">
       <Grid className={style.mt1} container spacing={1}>
-        <Grid item md={3}>
+        <Grid item md={3} xs={12}>
           <List>
             <ListItem>
               <Box className={style.fullWidth}>
-                <Typography>Categories</Typography>
+                <Typography>Categories</Typography> <br />
                 <Select fullWidth value={category} onChange={categoryHandler}>
                   <MenuItem value="all">All</MenuItem>
                   {categories &&

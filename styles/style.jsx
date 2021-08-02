@@ -128,6 +128,9 @@ const styles = makeStyles((theme) => ({
       width: 250,
     },
   },
+  carosel: {
+    maxHeight: "400",
+  },
 }));
 
 export default styles;

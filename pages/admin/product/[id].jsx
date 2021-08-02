@@ -320,9 +320,9 @@ function ProductEdit({ params }) {
                         name="featuredImage"
                         control={control}
                         defaultValue=""
-                        // rules={{
-                        //   required: true,
-                        // }}
+                        rules={{
+                          required: true,
+                        }}
                         render={({ field }) => (
                           <TextField
                             variant="outlined"

@@ -118,7 +118,7 @@ const Navbar = () => {
           </IconButton>
           <NextLink href="/" passHref>
             <Link>
-              <Typography className={style.brand} variant="h6">
+              <Typography className={style.brand} variant="h4">
                 Shoes <span style={{ color: "#982479" }}>Store</span>
               </Typography>
             </Link>

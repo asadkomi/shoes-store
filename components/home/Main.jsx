@@ -1,7 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext } from "react";
 import NextLink from "next/link";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Carousel from "react-material-ui-carousel";
+import Image from "next/image";
 import {
   Grid,
   Card,
@@ -20,7 +23,7 @@ import { Store } from "../../utils/store.jsx";
 const Main = (props) => {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
-  const products = props;
+  const { products, featuredProducts } = props;
 
   const style = styles();
 
@@ -42,9 +45,28 @@ const Main = (props) => {
 
   return (
     <div>
-      <h3 className="pt-5">Products</h3>
+      <Carousel className={style.mt1} animation="slide">
+        {featuredProducts.map((product) => (
+          <NextLink
+            key={product._id}
+            href={`/product/${product.slug}`}
+            passHref
+          >
+            <Link>
+              <Image
+                src={product.featuredImage}
+                alt={product.name}
+                width={1000}
+                height={400}
+                // className={style.featuredImage}
+              ></Image>
+            </Link>
+          </NextLink>
+        ))}
+      </Carousel>
+      <Typography variant="h2">Popular Shoes</Typography>
       <Grid container spacing={3}>
-        {products.products.map((product) => (
+        {products.map((product) => (
           <Grid item md={4} xs={12} key={product.name}>
             <Card>
               <NextLink href={`/product/${product.slug}`} passHref>
