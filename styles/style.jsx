@@ -95,15 +95,19 @@ const styles = makeStyles((theme) => ({
     border: "1px solid #D2D2D2",
     backgroundColor: "#ffffff",
     borderRadius: 5,
+    height: 40,
+    width: 400,
   },
   searchInput: {
     paddingLeft: 5,
+    paddingTop: 3,
     color: "#000000",
     "& ::placeholder": {
       color: "#606060",
     },
   },
   iconButton: {
+    marginLeft: "190px",
     backgroundColor: "#fff",
     padding: 5,
     borderRadius: "0 5px 5px 0",
