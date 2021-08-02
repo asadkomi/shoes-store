@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useSnackbar } from "notistack";
 import React, { useEffect, useContext, useReducer } from "react";
+import DeleteOutlineSharpIcon from "@material-ui/icons/DeleteOutlineSharp";
+import EditSharpIcon from "@material-ui/icons/EditSharp";
 import {
   CircularProgress,
   Grid,
@@ -216,16 +218,15 @@ function AdminProdcuts() {
                                 href={`/admin/product/${product._id}`}
                                 passHref
                               >
-                                <Button size="small" variant="contained">
-                                  Edit
+                                <Button size="small">
+                                  <EditSharpIcon />
                                 </Button>
                               </NextLink>{" "}
                               <Button
                                 onClick={() => deleteHandler(product._id)}
                                 size="small"
-                                variant="contained"
                               >
-                                Delete
+                                <DeleteOutlineSharpIcon />
                               </Button>
                             </TableCell>
                           </TableRow>

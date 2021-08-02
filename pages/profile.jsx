@@ -70,9 +70,9 @@ function Profile() {
 
   return (
     <Layout title="Profile">
-      <Grid container spacing={1} className="pt-4">
+      <Grid container spacing={1} className={style.section}>
         <Grid item md={3} xs={12}>
-          <Card className={style.section}>
+          <Card>
             <List>
               <NextLink href="/profile" passHref>
                 <ListItem selected button component="a">

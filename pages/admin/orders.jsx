@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
+import MoreSharpIcon from "@material-ui/icons/MoreSharp";
 import {
   CircularProgress,
   Grid,
@@ -135,17 +136,19 @@ function AdminOrders() {
                             <TableCell>${order.totalPrice}</TableCell>
                             <TableCell>
                               {order.isPaid
-                                ? `paid at ${order.paidAt}`
-                                : "not paid"}
+                                ? `Paid at ${order.paidAt}`
+                                : "Not paid"}
                             </TableCell>
                             <TableCell>
                               {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
-                                : "not delivered"}
+                                ? `Delivered at ${order.deliveredAt}`
+                                : "Not delivered"}
                             </TableCell>
                             <TableCell>
                               <NextLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
+                                <Button>
+                                  <MoreSharpIcon />
+                                </Button>
                               </NextLink>
                             </TableCell>
                           </TableRow>

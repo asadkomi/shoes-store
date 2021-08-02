@@ -63,159 +63,166 @@ export default function Shipping() {
   };
   return (
     <Layout title="Shipping">
-      <CheckoutWizard activeStep={1} />
-      <form onSubmit={handleSubmit(submitHandler)} className={style.form}>
-        <Typography className="p-3" component="h1" variant="h1">
-          Shipping
-        </Typography>
-        <List>
-          <ListItem>
-            <Controller
-              name="fullName"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="fullName"
-                  label="Full Name"
-                  {...field}
-                  error={Boolean(errors.fullName)}
-                  helperText={
-                    errors.fullName
-                      ? errors.fullName.type === "minLength"
-                        ? "Full Name should not be less than 2 characters"
-                        : "Full Name is required"
-                      : ""
-                  }
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="address"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="address"
-                  label="Address"
-                  {...field}
-                  error={Boolean(errors.address)}
-                  helperText={
-                    errors.address
-                      ? errors.address.type === "minLength"
-                        ? "Address should not be less than 2 characters"
-                        : "Address is required"
-                      : ""
-                  }
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="city"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="city"
-                  label="City"
-                  {...field}
-                  error={Boolean(errors.city)}
-                  helperText={
-                    errors.city
-                      ? errors.city.type === "minLength"
-                        ? "City should not be less than 2 characters"
-                        : "City is required"
-                      : ""
-                  }
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="zipCode"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="zipCode"
-                  label="Zip Code"
-                  {...field}
-                  error={Boolean(errors.zipCode)}
-                  helperText={
-                    errors.zipCode
-                      ? errors.zipCode.type === "minLength"
-                        ? "Zip Code should not be less than 2 characters"
-                        : "Zip Code is required"
-                      : ""
-                  }
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="country"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="country"
-                  label="Country"
-                  {...field}
-                  error={Boolean(errors.country)}
-                  helperText={
-                    errors.country
-                      ? errors.country.type === "minLength"
-                        ? "Country should not be less than 2 characters"
-                        : "Country is required"
-                      : ""
-                  }
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">
-              Continue
-            </Button>
-          </ListItem>
-        </List>
-      </form>
+      <div className={style.section}>
+        <CheckoutWizard activeStep={1} />
+        <form onSubmit={handleSubmit(submitHandler)} className={style.form}>
+          <Typography className="p-3" component="h1" variant="h1">
+            Shipping
+          </Typography>
+          <List>
+            <ListItem>
+              <Controller
+                name="fullName"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="fullName"
+                    label="Full Name"
+                    {...field}
+                    error={Boolean(errors.fullName)}
+                    helperText={
+                      errors.fullName
+                        ? errors.fullName.type === "minLength"
+                          ? "Full Name should not be less than 2 characters"
+                          : "Full Name is required"
+                        : ""
+                    }
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name="address"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="address"
+                    label="Address"
+                    {...field}
+                    error={Boolean(errors.address)}
+                    helperText={
+                      errors.address
+                        ? errors.address.type === "minLength"
+                          ? "Address should not be less than 2 characters"
+                          : "Address is required"
+                        : ""
+                    }
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name="city"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="city"
+                    label="City"
+                    {...field}
+                    error={Boolean(errors.city)}
+                    helperText={
+                      errors.city
+                        ? errors.city.type === "minLength"
+                          ? "City should not be less than 2 characters"
+                          : "City is required"
+                        : ""
+                    }
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name="zipCode"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="zipCode"
+                    label="Zip Code"
+                    {...field}
+                    error={Boolean(errors.zipCode)}
+                    helperText={
+                      errors.zipCode
+                        ? errors.zipCode.type === "minLength"
+                          ? "Zip Code should not be less than 2 characters"
+                          : "Zip Code is required"
+                        : ""
+                    }
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Controller
+                name="country"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="country"
+                    label="Country"
+                    {...field}
+                    error={Boolean(errors.country)}
+                    helperText={
+                      errors.country
+                        ? errors.country.type === "minLength"
+                          ? "Country should not be less than 2 characters"
+                          : "Country is required"
+                        : ""
+                    }
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Button
+                variant="contained"
+                type="submit"
+                fullWidth
+                color="primary"
+              >
+                Continue
+              </Button>
+            </ListItem>
+          </List>
+        </form>
+      </div>
     </Layout>
   );
 }

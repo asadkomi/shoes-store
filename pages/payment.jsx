@@ -49,55 +49,62 @@ export default function Payment() {
   };
   return (
     <Layout title="Payment Method">
-      <CheckoutWizard activeStep={2} />
-      <form className={style.form} onSubmit={submitHandler}>
-        <Typography className="p-3" component="h1" variant="h1">
-          Payment Method
-        </Typography>
-        <List>
-          <ListItem>
-            <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="Payment Method"
-                name="paymentMethod"
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
+      <div className={style.section}>
+        <CheckoutWizard activeStep={2} />
+        <form className={style.form} onSubmit={submitHandler}>
+          <Typography className="p-3" component="h1" variant="h1">
+            Payment Method
+          </Typography>
+          <List>
+            <ListItem>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="Payment Method"
+                  name="paymentMethod"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                >
+                  <FormControlLabel
+                    label="PayPal"
+                    value="PayPal"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                  <FormControlLabel
+                    label="Stripe"
+                    value="Stripe"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                  <FormControlLabel
+                    label="Cash"
+                    value="Cash"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
+            </ListItem>
+            <ListItem>
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
               >
-                <FormControlLabel
-                  label="PayPal"
-                  value="PayPal"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Stripe"
-                  value="Stripe"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Cash"
-                  value="Cash"
-                  control={<Radio />}
-                ></FormControlLabel>
-              </RadioGroup>
-            </FormControl>
-          </ListItem>
-          <ListItem>
-            <Button fullWidth type="submit" variant="contained" color="primary">
-              Continue
-            </Button>
-          </ListItem>
-          <ListItem>
-            <Button
-              fullWidth
-              type="button"
-              variant="contained"
-              onClick={() => router.push("/shipping")}
-            >
-              Back
-            </Button>
-          </ListItem>
-        </List>
-      </form>
+                Continue
+              </Button>
+            </ListItem>
+            <ListItem>
+              <Button
+                fullWidth
+                type="button"
+                variant="contained"
+                onClick={() => router.push("/shipping")}
+              >
+                Back
+              </Button>
+            </ListItem>
+          </List>
+        </form>
+      </div>
     </Layout>
   );
 }

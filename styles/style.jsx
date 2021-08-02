@@ -22,6 +22,11 @@ const styles = makeStyles((theme) => ({
     minHeight: "80vh",
   },
   section: {
+    marginTop: 80,
+    marginBottom: 10,
+  },
+
+  OrderSection: {
     marginTop: 10,
     marginBottom: 10,
   },
