@@ -11,8 +11,9 @@ import {
   Typography,
   CardActions,
   Button,
+  Link,
 } from "@material-ui/core";
-
+import { Rating } from "@material-ui/lab";
 import data from "../../Backend/data/data";
 import styles from "../../styles/style";
 import { Store } from "../../utils/store.jsx";
@@ -56,6 +57,7 @@ const Main = (props) => {
                   ></CardMedia>
                   <CardContent>
                     <Typography>{product.name}</Typography>
+                    <Rating value={product.rating} readOnly></Rating>
                   </CardContent>
                 </CardActionArea>
               </NextLink>
