@@ -162,7 +162,7 @@ const Navbar = () => {
             <InputBase
               name="query"
               className={style.searchInput}
-              placeholder="Search shoes"
+              placeholder="Search products"
               onChange={queryChangeHandler}
             />
             <IconButton

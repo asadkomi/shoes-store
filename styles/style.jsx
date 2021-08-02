@@ -92,23 +92,20 @@ const styles = makeStyles((theme) => ({
     },
   },
   searchForm: {
-    border: "1px solid #D2D2D2",
+    border: "1px solid #EAEAEA",
     backgroundColor: "#ffffff",
     borderRadius: 5,
-    height: 40,
-    width: 400,
   },
   searchInput: {
     paddingLeft: 5,
-    paddingTop: 3,
+    width: 400,
     color: "#000000",
     "& ::placeholder": {
       color: "#606060",
     },
   },
   iconButton: {
-    marginLeft: "190px",
-    backgroundColor: "#fff",
+    // backgroundColor: "#972479",
     padding: 5,
     borderRadius: "0 5px 5px 0",
     "& span": {
