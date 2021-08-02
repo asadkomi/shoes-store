@@ -58,7 +58,7 @@ const Main = (props) => {
                   <img
                     src={product.featuredImage}
                     alt={product.name}
-                    // layout="fill"
+                    layout="responsive"
                     className={style.image}
                   ></img>
                 </Link>

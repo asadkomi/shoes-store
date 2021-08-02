@@ -141,10 +141,10 @@ const styles = makeStyles((theme) => ({
   },
 
   image: {
-    // objectFit: "contain",
+    objectFit: "cover",
     width: "100%",
 
-    height: 400,
+    height: 300,
   },
 }));
 
