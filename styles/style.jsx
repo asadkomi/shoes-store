@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const styles = makeStyles({
+const styles = makeStyles((theme) => ({
   navbar: {
     // backgroundColor: "#fff",
     color: "#201F20",
@@ -13,6 +13,7 @@ const styles = makeStyles({
   brand: {
     fontWeight: "bold",
     fontSize: "1.5rem",
+    color: "#333",
   },
   gap: {
     flexGrow: 1,
@@ -48,6 +49,10 @@ const styles = makeStyles({
 
     marginTop: 150,
   },
+
+  searchCard: {
+    height: 200,
+  },
   navbarButton: {
     color: "#333",
     textTransform: "initial",
@@ -74,6 +79,55 @@ const styles = makeStyles({
     borderRight: "1px #808080 solid",
     paddingRight: "1rem",
   },
-});
+  toolbar: {
+    justifyContent: "space-between",
+  },
+  menuButton: { padding: 0 },
+  mt1: { marginTop: "1rem" },
+  // search
+  searchSection: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  searchForm: {
+    border: "1px solid #D2D2D2",
+    backgroundColor: "#ffffff",
+    borderRadius: 5,
+  },
+  searchInput: {
+    paddingLeft: 5,
+    color: "#000000",
+    "& ::placeholder": {
+      color: "#606060",
+    },
+  },
+  iconButton: {
+    backgroundColor: "#fff",
+    padding: 5,
+    borderRadius: "0 5px 5px 0",
+    "& span": {
+      color: "#000000",
+    },
+  },
+  sort: {
+    marginRight: 5,
+  },
+
+  fullContainer: { height: "100vh" },
+  mapInputBox: {
+    position: "absolute",
+    display: "flex",
+    left: 0,
+    right: 0,
+    margin: "10px auto",
+    width: 300,
+    height: 40,
+    "& input": {
+      width: 250,
+    },
+  },
+}));
 
 export default styles;

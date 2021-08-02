@@ -1,20 +1,38 @@
 import React, { useContext, useState, useEffect } from "react";
 import NextLink from "next/link";
+import { useSnackbar } from "notistack";
+import axios from "axios";
 import {
   AppBar,
   Toolbar,
   Typography,
+  Container,
   Link,
+  createMuiTheme,
+  ThemeProvider,
+  CssBaseline,
   Switch,
   Badge,
   Button,
   Menu,
   MenuItem,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  InputBase,
 } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import CancelIcon from "@material-ui/icons/Cancel";
+import SearchIcon from "@material-ui/icons/Search";
 import styles from "../../styles/style.jsx";
 import { Store } from "../../utils/store.jsx";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
+import { getError } from "../../utils/error.js";
 
 const Navbar = () => {
   const style = styles();
@@ -31,6 +49,39 @@ const Navbar = () => {
     const newDarkMode = !darkMode;
     setDarkModeState(newDarkMode);
     Cookies.set("darkMode", newDarkMode ? "ON" : "OFF");
+  };
+
+  const [sidbarVisible, setSidebarVisible] = useState(false);
+  const sidebarOpenHandler = () => {
+    setSidebarVisible(true);
+  };
+  const sidebarCloseHandler = () => {
+    setSidebarVisible(false);
+  };
+
+  const [categories, setCategories] = useState([]);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const fetchCategories = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/categories`);
+      setCategories(data);
+    } catch (err) {
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const [query, setQuery] = useState("");
+  const queryChangeHandler = (e) => {
+    setQuery(e.target.value);
+  };
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -55,29 +106,86 @@ const Navbar = () => {
 
   return (
     <AppBar position="static" color="#fff" className={style.navbar}>
-      <Toolbar>
-        <NextLink href="/" passHref>
-          <Link>
-            <Typography className={style.brand} variant="h6">
-              Shoes <span style={{ color: "#982479" }}>Store</span>
-            </Typography>
-          </Link>
-        </NextLink>
-        <div className={style.gap}></div>
+      <Toolbar className={style.toolbar}>
+        <Box display="flex" alignItems="center">
+          <IconButton
+            edge="start"
+            aria-label="open drawer"
+            onClick={sidebarOpenHandler}
+            className={style.menuButton}
+          >
+            <MenuIcon className={style.navbarButton} />
+          </IconButton>
+          <NextLink href="/" passHref>
+            <Link>
+              <Typography className={style.brand} variant="h6">
+                Shoes <span style={{ color: "#982479" }}>Store</span>
+              </Typography>
+            </Link>
+          </NextLink>
+        </Box>
+        <Drawer
+          anchor="left"
+          open={sidbarVisible}
+          onClose={sidebarCloseHandler}
+        >
+          <List>
+            <ListItem>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Typography>Shopping by category</Typography>
+                <IconButton aria-label="close" onClick={sidebarCloseHandler}>
+                  <CancelIcon />
+                </IconButton>
+              </Box>
+            </ListItem>
+            <Divider light />
+            {categories.map((category) => (
+              <NextLink
+                key={category}
+                href={`/search?category=${category}`}
+                passHref
+              >
+                <ListItem button component="a" onClick={sidebarCloseHandler}>
+                  <ListItemText primary={category}></ListItemText>
+                </ListItem>
+              </NextLink>
+            ))}
+          </List>
+        </Drawer>
+
+        <div className={style.searchSection}>
+          <form onSubmit={submitHandler} className={style.searchForm}>
+            <InputBase
+              name="query"
+              className={style.searchInput}
+              placeholder="Search shoes"
+              onChange={queryChangeHandler}
+            />
+            <IconButton
+              type="submit"
+              className={style.iconButton}
+              aria-label="search"
+            >
+              <SearchIcon />
+            </IconButton>
+          </form>
+        </div>
         <div>
-          {/* <Switch
-            checked={darkModeState}
-            onChange={darkModeChangeHandler}
-          ></Switch> */}
           <NextLink href="/cart" passHref>
             <Link>
-              {cart.cartItems.length > 0 ? (
-                <Badge color="secondary" badgeContent={cart.cartItems.length}>
-                  Cart
-                </Badge>
-              ) : (
-                "Cart"
-              )}
+              <Typography component="span">
+                {cart.cartItems.length > 0 ? (
+                  <Badge color="secondary" badgeContent={cart.cartItems.length}>
+                    Cart
+                  </Badge>
+                ) : (
+                  "Cart"
+                )}
+              </Typography>
             </Link>
           </NextLink>
           {userInfo ? (
@@ -115,7 +223,10 @@ const Navbar = () => {
             </>
           ) : (
             <NextLink href="/login" passHref>
-              <Link>Login</Link>
+              <Link>
+                {" "}
+                <Typography component="span">Login</Typography>
+              </Link>
             </NextLink>
           )}
         </div>
