@@ -171,78 +171,84 @@ const ProductDetails = (props) => {
             </List>
           </Card>
         </Grid>
-        <List>
-          <ListItem>
-            <Typography name="reviews" id="reviews" variant="h2">
-              Customer Reviews
-            </Typography>
-          </ListItem>
-          {productReviews.length === 0 && <ListItem>No review</ListItem>}
-          {productReviews.map((review) => (
-            <ListItem key={review._id}>
-              <Grid container>
-                <Grid item className={style.reviewItem}>
-                  <Typography>
-                    <strong>{review.name}</strong>
+        <Grid container spacing={1}>
+          <Grid item md={6} xs={12}>
+            <List>
+              <ListItem>
+                <Typography name="reviews" id="reviews" variant="h2">
+                  Customer Reviews
+                </Typography>
+              </ListItem>
+              {productReviews.length === 0 && <ListItem>No review</ListItem>}
+              {productReviews.map((review) => (
+                <ListItem key={review._id}>
+                  <Grid container>
+                    <Grid item className={style.reviewItem}>
+                      <Typography>
+                        <strong>{review.name}</strong>
+                      </Typography>
+                      <Typography>
+                        {review.createdAt.substring(0, 10)}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Rating value={review.rating} readOnly></Rating>
+                      <Typography>{review.comment}</Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              ))}
+              <ListItem>
+                {userInfo ? (
+                  <form onSubmit={submitHandler} className={style.reviewForm}>
+                    <List>
+                      <ListItem>
+                        <Typography variant="h2">Leave your review</Typography>
+                      </ListItem>
+                      <ListItem>
+                        <TextField
+                          multiline
+                          variant="outlined"
+                          fullWidth
+                          name="review"
+                          label="Enter comment"
+                          value={comment}
+                          onChange={(e) => setComment(e.target.value)}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <Rating
+                          name="simple-controlled"
+                          value={rating}
+                          onChange={(e) => setRating(e.target.value)}
+                        />
+                      </ListItem>
+                      <ListItem>
+                        <Button
+                          type="submit"
+                          fullWidth
+                          variant="contained"
+                          color="primary"
+                        >
+                          Submit
+                        </Button>
+                        {loading && <CircularProgress></CircularProgress>} 
+                      </ListItem>
+                    </List>
+                  </form>
+                ) : (
+                  <Typography variant="h2">
+                    Please{" "}
+                    <Link href={`/login?redirect=/product/${product.slug}`}>
+                      login
+                    </Link>{" "}
+                    to write a review
                   </Typography>
-                  <Typography>{review.createdAt.substring(0, 10)}</Typography>
-                </Grid>
-                <Grid item>
-                  <Rating value={review.rating} readOnly></Rating>
-                  <Typography>{review.comment}</Typography>
-                </Grid>
-              </Grid>
-            </ListItem>
-          ))}
-          <ListItem>
-            {userInfo ? (
-              <form onSubmit={submitHandler} className={style.reviewForm}>
-                <List>
-                  <ListItem>
-                    <Typography variant="h2">Leave your review</Typography>
-                  </ListItem>
-                  <ListItem>
-                    <TextField
-                      multiline
-                      variant="outlined"
-                      fullWidth
-                      name="review"
-                      label="Enter comment"
-                      value={comment}
-                      onChange={(e) => setComment(e.target.value)}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <Rating
-                      name="simple-controlled"
-                      value={rating}
-                      onChange={(e) => setRating(e.target.value)}
-                    />
-                  </ListItem>
-                  <ListItem>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                    >
-                      Submit
-                    </Button>
-                    {loading && <CircularProgress></CircularProgress>} 
-                  </ListItem>
-                </List>
-              </form>
-            ) : (
-              <Typography variant="h2">
-                Please{" "}
-                <Link href={`/login?redirect=/product/${product.slug}`}>
-                  login
-                </Link>{" "}
-                to write a review
-              </Typography>
-            )}
-          </ListItem>
-        </List>
+                )}
+              </ListItem>
+            </List>
+          </Grid>
+        </Grid>
       </Grid>
     </Layout>
   );

@@ -26,6 +26,7 @@ import {
   InputBase,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import ShopOutlinedIcon from "@material-ui/icons/ShopOutlined";
 import CancelIcon from "@material-ui/icons/Cancel";
 import SearchIcon from "@material-ui/icons/Search";
 import styles from "../../styles/style.jsx";
@@ -34,7 +35,23 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { getError } from "../../utils/error.js";
 
-const Navbar = () => {
+import useScrollTrigger from "@material-ui/core/useScrollTrigger";
+
+function ElevationScroll(props) {
+  const { children, window } = props;
+
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
+
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
+
+const Navbar = (props) => {
   const style = styles();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -105,133 +122,140 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" color="#fff" className={style.navbar}>
-      <Toolbar className={style.toolbar}>
-        <Box display="flex" alignItems="center">
-          <IconButton
-            edge="start"
-            aria-label="open drawer"
-            onClick={sidebarOpenHandler}
-            className={style.menuButton}
-          >
-            <MenuIcon className={style.navbarButton} />
-          </IconButton>
-          <NextLink href="/" passHref>
-            <Link>
-              <Typography className={style.brand} variant="h4">
-                Shoes <span style={{ color: "#982479" }}>Store</span>
-              </Typography>
-            </Link>
-          </NextLink>
-        </Box>
-        <Drawer
-          anchor="left"
-          open={sidbarVisible}
-          onClose={sidebarCloseHandler}
-        >
-          <List>
-            <ListItem>
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography>Shopping by category</Typography>
-                <IconButton aria-label="close" onClick={sidebarCloseHandler}>
-                  <CancelIcon />
-                </IconButton>
-              </Box>
-            </ListItem>
-            <Divider light />
-            {categories.map((category) => (
-              <NextLink
-                key={category}
-                href={`/search?category=${category}`}
-                passHref
-              >
-                <ListItem button component="a" onClick={sidebarCloseHandler}>
-                  <ListItemText primary={category}></ListItemText>
-                </ListItem>
-              </NextLink>
-            ))}
-          </List>
-        </Drawer>
-
-        <div className={style.searchSection}>
-          <form onSubmit={submitHandler} className={style.searchForm}>
-            <InputBase
-              name="query"
-              className={style.searchInput}
-              placeholder="Search products"
-              onChange={queryChangeHandler}
-            />
+    <ElevationScroll {...props}>
+      <AppBar color="#fff" className={style.navbar}>
+        <Toolbar className={style.toolbar}>
+          <Box display="flex" alignItems="center">
             <IconButton
-              type="submit"
-              className={style.iconButton}
-              aria-label="search"
+              edge="start"
+              aria-label="open drawer"
+              onClick={sidebarOpenHandler}
+              className={style.menuButton}
             >
-              <SearchIcon />
+              <MenuIcon className={style.navbarButton} />
             </IconButton>
-          </form>
-        </div>
-        <div>
-          <NextLink href="/cart" passHref>
-            <Link>
-              <Typography component="span">
-                {cart.cartItems.length > 0 ? (
-                  <Badge color="secondary" badgeContent={cart.cartItems.length}>
-                    Cart
-                  </Badge>
-                ) : (
-                  "Cart"
-                )}
-              </Typography>
-            </Link>
-          </NextLink>
-          {userInfo ? (
-            <>
-              <Button
-                className={style.navbarButton}
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                onClick={loginClickHandler}
-              >
-                {userInfo.name}{" "}
-              </Button>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={menuCloseHandler}
-              >
-                <MenuItem onClick={(e) => menuCloseHandler(e, "/profile")}>
-                  Profile
-                </MenuItem>
-                <MenuItem onClick={(e) => menuCloseHandler(e, "/orderHistory")}>
-                  Order History
-                </MenuItem>
-                {userInfo.isAdmin && (
-                  <MenuItem
-                    onClick={(e) => menuCloseHandler(e, "/admin/dashboard")}
-                  >
-                    Dashboard
-                  </MenuItem>
-                )}
-                <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
-              </Menu>
-            </>
-          ) : (
-            <NextLink href="/login" passHref>
+            <NextLink href="/" passHref>
               <Link>
-                {" "}
-                <Typography component="span">Login</Typography>
+                <Typography className={style.brand} variant="h4">
+                  Shoes <span style={{ color: "#982479" }}>Store</span>
+                </Typography>
               </Link>
             </NextLink>
-          )}
-        </div>
-      </Toolbar>
-    </AppBar>
+          </Box>
+          <Drawer
+            anchor="left"
+            open={sidbarVisible}
+            onClose={sidebarCloseHandler}
+          >
+            <List>
+              <ListItem>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Typography>Shopping by category</Typography>
+                  <IconButton aria-label="close" onClick={sidebarCloseHandler}>
+                    <CancelIcon />
+                  </IconButton>
+                </Box>
+              </ListItem>
+              <Divider light />
+              {categories.map((category) => (
+                <NextLink
+                  key={category}
+                  href={`/search?category=${category}`}
+                  passHref
+                >
+                  <ListItem button component="a" onClick={sidebarCloseHandler}>
+                    <ListItemText primary={category}></ListItemText>
+                  </ListItem>
+                </NextLink>
+              ))}
+            </List>
+          </Drawer>
+
+          <div className={style.searchSection}>
+            <form onSubmit={submitHandler} className={style.searchForm}>
+              <InputBase
+                name="query"
+                className={style.searchInput}
+                placeholder="Search products"
+                onChange={queryChangeHandler}
+              />
+              <IconButton
+                type="submit"
+                className={style.iconButton}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </form>
+          </div>
+          <div>
+            <NextLink href="/cart" passHref>
+              <Link>
+                <Typography component="span">
+                  {cart.cartItems.length > 0 ? (
+                    <Badge
+                      color="secondary"
+                      badgeContent={cart.cartItems.length}
+                    >
+                      <ShopOutlinedIcon />
+                    </Badge>
+                  ) : (
+                    <ShopOutlinedIcon />
+                  )}
+                </Typography>
+              </Link>
+            </NextLink>
+            {userInfo ? (
+              <>
+                <Button
+                  className={style.navbarButton}
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={loginClickHandler}
+                >
+                  {userInfo.name}{" "}
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={menuCloseHandler}
+                >
+                  <MenuItem onClick={(e) => menuCloseHandler(e, "/profile")}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={(e) => menuCloseHandler(e, "/orderHistory")}
+                  >
+                    Order History
+                  </MenuItem>
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) => menuCloseHandler(e, "/admin/dashboard")}
+                    >
+                      Dashboard
+                    </MenuItem>
+                  )}
+                  <MenuItem onClick={logoutClickHandler}>Logout</MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <NextLink href="/login" passHref>
+                <Link>
+                  {" "}
+                  <Typography component="span">Login</Typography>
+                </Link>
+              </NextLink>
+            )}
+          </div>
+        </Toolbar>
+      </AppBar>
+    </ElevationScroll>
   );
 };
 

@@ -12,7 +12,7 @@ const styles = makeStyles((theme) => ({
   },
   brand: {
     fontWeight: "bold",
-    fontSize: "1.5rem",
+    fontSize: "1.2rem",
     color: "#333",
   },
   gap: {
@@ -73,6 +73,7 @@ const styles = makeStyles((theme) => ({
   reviewForm: {
     maxWidth: 800,
     width: "100%",
+    alignItems: "start",
   },
   reviewItem: {
     marginRight: "1rem",
