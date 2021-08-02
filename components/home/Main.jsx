@@ -45,25 +45,28 @@ const Main = (props) => {
 
   return (
     <div>
-      <Carousel className={style.mt1} animation="slide">
-        {featuredProducts.map((product) => (
-          <NextLink
-            key={product._id}
-            href={`/product/${product.slug}`}
-            passHref
-          >
-            <Link>
-              <Image
-                src={product.featuredImage}
-                alt={product.name}
-                width={1000}
-                height={400}
-                // className={style.featuredImage}
-              ></Image>
-            </Link>
-          </NextLink>
-        ))}
-      </Carousel>
+      <Grid className={style.mt1} container spacing={1}>
+        <Grid md={12} xs={12}>
+          <Carousel animation="slide">
+            {featuredProducts.map((product) => (
+              <NextLink
+                key={product._id}
+                href={`/product/${product.slug}`}
+                passHref
+              >
+                <Link>
+                  <img
+                    src={product.featuredImage}
+                    alt={product.name}
+                    // layout="fill"
+                    className={style.image}
+                  ></img>
+                </Link>
+              </NextLink>
+            ))}
+          </Carousel>
+        </Grid>
+      </Grid>
       <Typography variant="h2">Popular Shoes</Typography>
       <Grid container spacing={3}>
         {products.map((product) => (

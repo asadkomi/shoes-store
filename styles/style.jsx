@@ -131,6 +131,21 @@ const styles = makeStyles((theme) => ({
   carosel: {
     maxHeight: "400",
   },
+
+  imageContainer: {
+    width: "100%",
+  },
+
+  imageContainerDev: {
+    position: "unset",
+  },
+
+  image: {
+    // objectFit: "contain",
+    width: "100%",
+
+    height: 400,
+  },
 }));
 
 export default styles;
