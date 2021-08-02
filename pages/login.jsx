@@ -56,89 +56,94 @@ const Login = () => {
   };
   return (
     <Layout title="Login">
-      <Card className={style.card}>
-        <form onSubmit={handleSubmit(submitHandler)}>
-          <Typography className="p-3" component="h1" variant="h1">
-            Login
-          </Typography>
-          <List>
-            <ListItem>
-              <Controller
-                name="email"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                }}
-                render={({ field }) => (
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="email"
-                    label="Email"
-                    inputProps={{ type: "email" }}
-                    {...field}
-                    error={Boolean(errors.email)}
-                    helperText={
-                      errors.email
-                        ? errors.email.type === "pattern"
-                          ? "Email is not valid"
-                          : "Email is required"
-                        : ""
-                    }
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
-            <ListItem>
-              <Controller
-                name="password"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 6,
-                }}
-                render={({ field }) => (
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="password"
-                    label="Password"
-                    inputProps={{ type: "password" }}
-                    {...field}
-                    error={Boolean(errors.password)}
-                    helperText={
-                      errors.password
-                        ? errors.password.type === "minLength"
-                          ? "Password should not be less the 6 characters"
-                          : "Password is required"
-                        : ""
-                    }
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
-            <ListItem>
-              <Button
-                variant="contained"
-                type="submit"
-                fullWidth
-                color="primary"
-              >
-                Login
-              </Button>
-            </ListItem>
-            <ListItem>
-              Don&apos;t have an account? &nbsp;
-              <NextLink href={`/register?redirect=${redirect || "/"}`} passHref>
-                <Link>Register</Link>
-              </NextLink>
-            </ListItem>
-          </List>
-        </form>
-      </Card>
+      <div className={style.section}>
+        <Card className={style.card}>
+          <form onSubmit={handleSubmit(submitHandler)}>
+            <Typography className="p-3" component="h1" variant="h1">
+              Login
+            </Typography>
+            <List>
+              <ListItem>
+                <Controller
+                  name="email"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: true,
+                    pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id="email"
+                      label="Email"
+                      inputProps={{ type: "email" }}
+                      {...field}
+                      error={Boolean(errors.email)}
+                      helperText={
+                        errors.email
+                          ? errors.email.type === "pattern"
+                            ? "Email is not valid"
+                            : "Email is required"
+                          : ""
+                      }
+                    ></TextField>
+                  )}
+                ></Controller>
+              </ListItem>
+              <ListItem>
+                <Controller
+                  name="password"
+                  control={control}
+                  defaultValue=""
+                  rules={{
+                    required: true,
+                    minLength: 6,
+                  }}
+                  render={({ field }) => (
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      id="password"
+                      label="Password"
+                      inputProps={{ type: "password" }}
+                      {...field}
+                      error={Boolean(errors.password)}
+                      helperText={
+                        errors.password
+                          ? errors.password.type === "minLength"
+                            ? "Password should not be less the 6 characters"
+                            : "Password is required"
+                          : ""
+                      }
+                    ></TextField>
+                  )}
+                ></Controller>
+              </ListItem>
+              <ListItem>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  fullWidth
+                  color="primary"
+                >
+                  Login
+                </Button>
+              </ListItem>
+              <ListItem>
+                Don&apos;t have an account? &nbsp;
+                <NextLink
+                  href={`/register?redirect=${redirect || "/"}`}
+                  passHref
+                >
+                  <Link>Register</Link>
+                </NextLink>
+              </ListItem>
+            </List>
+          </form>
+        </Card>
+      </div>
     </Layout>
   );
 };

@@ -114,116 +114,118 @@ export default function Search(props) {
   };
   return (
     <Layout title="Search">
-      <Grid className={style.mt1} container spacing={1}>
-        <Grid item md={3} xs={12}>
-          <List>
-            <ListItem>
-              <Box className={style.fullWidth}>
-                <Typography>Categories</Typography> <br />
-                <Select fullWidth value={category} onChange={categoryHandler}>
-                  <MenuItem value="all">All</MenuItem>
-                  {categories &&
-                    categories.map((category) => (
-                      <MenuItem key={category} value={category}>
-                        {category}
+      <div className={style.section}>
+        <Grid className={style.mt1} container spacing={1}>
+          <Grid item md={3} xs={12}>
+            <List>
+              <ListItem>
+                <Box className={style.fullWidth}>
+                  <Typography>Categories</Typography> <br />
+                  <Select fullWidth value={category} onChange={categoryHandler}>
+                    <MenuItem value="all">All</MenuItem>
+                    {categories &&
+                      categories.map((category) => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </Box>
+              </ListItem>
+              <ListItem>
+                <Box className={style.fullWidth}>
+                  <Typography>Brands</Typography>
+                  <Select value={brand} onChange={brandHandler} fullWidth>
+                    <MenuItem value="all">All</MenuItem>
+                    {brands &&
+                      brands.map((brand) => (
+                        <MenuItem key={brand} value={brand}>
+                          {brand}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </Box>
+              </ListItem>
+              <ListItem>
+                <Box className={style.fullWidth}>
+                  <Typography>Prices</Typography>
+                  <Select value={price} onChange={priceHandler} fullWidth>
+                    <MenuItem value="all">All</MenuItem>
+                    {prices.map((price) => (
+                      <MenuItem key={price.value} value={price.value}>
+                        {price.name}
                       </MenuItem>
                     ))}
-                </Select>
-              </Box>
-            </ListItem>
-            <ListItem>
-              <Box className={style.fullWidth}>
-                <Typography>Brands</Typography>
-                <Select value={brand} onChange={brandHandler} fullWidth>
-                  <MenuItem value="all">All</MenuItem>
-                  {brands &&
-                    brands.map((brand) => (
-                      <MenuItem key={brand} value={brand}>
-                        {brand}
+                  </Select>
+                </Box>
+              </ListItem>
+              <ListItem>
+                <Box className={style.fullWidth}>
+                  <Typography>Ratings</Typography>
+                  <Select value={rating} onChange={ratingHandler} fullWidth>
+                    <MenuItem value="all">All</MenuItem>
+                    {ratings.map((rating) => (
+                      <MenuItem dispaly="flex" key={rating} value={rating}>
+                        <Rating value={rating} readOnly />
+                        <Typography component="span">&amp; Up</Typography>
                       </MenuItem>
                     ))}
-                </Select>
-              </Box>
-            </ListItem>
-            <ListItem>
-              <Box className={style.fullWidth}>
-                <Typography>Prices</Typography>
-                <Select value={price} onChange={priceHandler} fullWidth>
-                  <MenuItem value="all">All</MenuItem>
-                  {prices.map((price) => (
-                    <MenuItem key={price.value} value={price.value}>
-                      {price.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Box>
-            </ListItem>
-            <ListItem>
-              <Box className={style.fullWidth}>
-                <Typography>Ratings</Typography>
-                <Select value={rating} onChange={ratingHandler} fullWidth>
-                  <MenuItem value="all">All</MenuItem>
-                  {ratings.map((rating) => (
-                    <MenuItem dispaly="flex" key={rating} value={rating}>
-                      <Rating value={rating} readOnly />
-                      <Typography component="span">&amp; Up</Typography>
-                    </MenuItem>
-                  ))}
-                </Select>
-              </Box>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item md={9}>
-          <Grid container justifyContent="space-between" alignItems="center">
-            <Grid item>
-              {products.length === 0 ? "No" : countProducts} Results
-              {query !== "all" && query !== "" && " : " + query}
-              {category !== "all" && " : " + category}
-              {brand !== "all" && " : " + brand}
-              {price !== "all" && " : Price " + price}
-              {rating !== "all" && " : Rating " + rating + " & up"}
-              {(query !== "all" && query !== "") ||
-              category !== "all" ||
-              brand !== "all" ||
-              rating !== "all" ||
-              price !== "all" ? (
-                <Button onClick={() => router.push("/search")}>
-                  <CancelIcon />
-                </Button>
-              ) : null}
-            </Grid>
-            <Grid item>
-              <Typography component="span" className={style.sort}>
-                Sort by
-              </Typography>
-              <Select value={sort} onChange={sortHandler}>
-                <MenuItem value="featured">Featured</MenuItem>
-                <MenuItem value="lowest">Price: Low to High</MenuItem>
-                <MenuItem value="highest">Price: High to Low</MenuItem>
-                <MenuItem value="toprated">Customer Reviews</MenuItem>
-                <MenuItem value="newest">Newest Arrivals</MenuItem>
-              </Select>
-            </Grid>
+                  </Select>
+                </Box>
+              </ListItem>
+            </List>
           </Grid>
-          <Grid className={style.mt1} container spacing={3}>
-            {products.map((product) => (
-              <Grid item md={4} key={product.name}>
-                <ProductItem
-                  product={product}
-                  addToCartHandler={addToCartHandler}
-                />
+          <Grid item md={9}>
+            <Grid container justifyContent="space-between" alignItems="center">
+              <Grid item>
+                {products.length === 0 ? "No" : countProducts} Results
+                {query !== "all" && query !== "" && " : " + query}
+                {category !== "all" && " : " + category}
+                {brand !== "all" && " : " + brand}
+                {price !== "all" && " : Price " + price}
+                {rating !== "all" && " : Rating " + rating + " & up"}
+                {(query !== "all" && query !== "") ||
+                category !== "all" ||
+                brand !== "all" ||
+                rating !== "all" ||
+                price !== "all" ? (
+                  <Button onClick={() => router.push("/search")}>
+                    <CancelIcon />
+                  </Button>
+                ) : null}
               </Grid>
-            ))}
+              <Grid item>
+                <Typography component="span" className={style.sort}>
+                  Sort by
+                </Typography>
+                <Select value={sort} onChange={sortHandler}>
+                  <MenuItem value="featured">Featured</MenuItem>
+                  <MenuItem value="lowest">Price: Low to High</MenuItem>
+                  <MenuItem value="highest">Price: High to Low</MenuItem>
+                  <MenuItem value="toprated">Customer Reviews</MenuItem>
+                  <MenuItem value="newest">Newest Arrivals</MenuItem>
+                </Select>
+              </Grid>
+            </Grid>
+            <Grid className={style.mt1} container spacing={3}>
+              {products.map((product) => (
+                <Grid item md={4} key={product.name}>
+                  <ProductItem
+                    product={product}
+                    addToCartHandler={addToCartHandler}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+            <Pagination
+              className={style.mt1}
+              defaultPage={parseInt(query.page || "1")}
+              count={pages}
+              onChange={pageHandler}
+            ></Pagination>
           </Grid>
-          <Pagination
-            className={style.mt1}
-            defaultPage={parseInt(query.page || "1")}
-            count={pages}
-            onChange={pageHandler}
-          ></Pagination>
         </Grid>
-      </Grid>
+      </div>
     </Layout>
   );
 }

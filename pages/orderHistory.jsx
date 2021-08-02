@@ -69,81 +69,85 @@ function OrderHistory() {
 
   return (
     <Layout title="Order History">
-      <Grid container spacing={1} className="pt-4">
-        <Grid item md={3} xs={12}>
-          <Card className={style.section}>
-            <List>
-              <NextLink href="/profile" passHref>
-                <ListItem button component="a">
-                  <ListItemText primary="User Profile"></ListItemText>
+      <div className={style.section}>
+        <Grid container spacing={1} className="pt-4">
+          <Grid item md={3} xs={12}>
+            <Card className={style.section}>
+              <List>
+                <NextLink href="/profile" passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary="User Profile"></ListItemText>
+                  </ListItem>
+                </NextLink>
+                <NextLink href="/order-history" passHref>
+                  <ListItem selected button component="a">
+                    <ListItemText primary="Order History"></ListItemText>
+                  </ListItem>
+                </NextLink>
+              </List>
+            </Card>
+          </Grid>
+          <Grid item md={9} xs={12}>
+            <Card className={style.section}>
+              <List>
+                <ListItem>
+                  <Typography component="h1" variant="h1">
+                    Order History
+                  </Typography>
                 </ListItem>
-              </NextLink>
-              <NextLink href="/order-history" passHref>
-                <ListItem selected button component="a">
-                  <ListItemText primary="Order History"></ListItemText>
-                </ListItem>
-              </NextLink>
-            </List>
-          </Card>
-        </Grid>
-        <Grid item md={9} xs={12}>
-          <Card className={style.section}>
-            <List>
-              <ListItem>
-                <Typography component="h1" variant="h1">
-                  Order History
-                </Typography>
-              </ListItem>
-              <ListItem>
-                {loading ? (
-                  <CircularProgress />
-                ) : error ? (
-                  <Typography className={style.error}>{error}</Typography>
-                ) : (
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>DATE</TableCell>
-                          <TableCell>TOTAL</TableCell>
-                          <TableCell>PAID</TableCell>
-                          <TableCell>DELIVERED</TableCell>
-                          <TableCell>ACTION</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {orders.map((order) => (
-                          <TableRow key={order._id}>
-                            <TableCell>{order._id.substring(20, 24)}</TableCell>
-                            <TableCell>{order.createdAt}</TableCell>
-                            <TableCell>${order.totalPrice}</TableCell>
-                            <TableCell>
-                              {order.isPaid
-                                ? `paid at ${order.paidAt}`
-                                : "not paid"}
-                            </TableCell>
-                            <TableCell>
-                              {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
-                                : "not delivered"}
-                            </TableCell>
-                            <TableCell>
-                              <NextLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
-                              </NextLink>
-                            </TableCell>
+                <ListItem>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : error ? (
+                    <Typography className={style.error}>{error}</Typography>
+                  ) : (
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>DATE</TableCell>
+                            <TableCell>TOTAL</TableCell>
+                            <TableCell>PAID</TableCell>
+                            <TableCell>DELIVERED</TableCell>
+                            <TableCell>ACTION</TableCell>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                )}
-              </ListItem>
-            </List>
-          </Card>
+                        </TableHead>
+                        <TableBody>
+                          {orders.map((order) => (
+                            <TableRow key={order._id}>
+                              <TableCell>
+                                {order._id.substring(20, 24)}
+                              </TableCell>
+                              <TableCell>{order.createdAt}</TableCell>
+                              <TableCell>${order.totalPrice}</TableCell>
+                              <TableCell>
+                                {order.isPaid
+                                  ? `paid at ${order.paidAt}`
+                                  : "not paid"}
+                              </TableCell>
+                              <TableCell>
+                                {order.isDelivered
+                                  ? `delivered at ${order.deliveredAt}`
+                                  : "not delivered"}
+                              </TableCell>
+                              <TableCell>
+                                <NextLink href={`/order/${order._id}`} passHref>
+                                  <Button variant="contained">Details</Button>
+                                </NextLink>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  )}
+                </ListItem>
+              </List>
+            </Card>
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </Layout>
   );
 }

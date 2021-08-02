@@ -81,8 +81,14 @@ const Main = (props) => {
                     title={product.name}
                   ></CardMedia>
                   <CardContent>
-                    <Typography>{product.name}</Typography>
-                    <Rating value={product.rating} readOnly></Rating>
+                    <Grid container spacing={1}>
+                      <Grid item md={6} xs={6} >
+                        <Typography>{product.name}</Typography>
+                      </Grid>
+                      <Grid item md={6} xs={6} align="right">
+                        <Rating value={product.rating} readOnly></Rating>
+                      </Grid>
+                    </Grid>
                   </CardContent>
                 </CardActionArea>
               </NextLink>
